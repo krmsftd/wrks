@@ -1,15 +1,15 @@
 body {
+  margin: 0;
+}
+.main-wrapper {
   display: grid;
-  grid-template-areas:
-          "header header"
-          "add remove"
-          "footer footer";
+  grid-template-areas: "header header" "add remove" "footer footer";
   grid-template-rows: 160px 1fr 90px;
-  grid-template-columns: 50%  50%;
+  grid-template-columns: 50% 50%;
   grid-gap: 10px;
-  height: 90vh;
+  height: calc(100vh - 40px);
   margin: 20px;
-  }
+}
 #pageHeader, #pageFooter, #mainAdd, #mainRemove {
   padding: 1em;
   border-radius: 20px;
@@ -29,7 +29,7 @@ body {
   text-align: center;
   font-weight: bold;
   opacity: 50%;
-  }
+}
 #pageFooter:Hover {
   transition: 1s;
   background: red;
@@ -44,7 +44,7 @@ body {
 #mainRemove:Hover {
   transition: 2s;
   background: indianred;
-    }
+}
 #mainAdd {
   grid-area: add;
   background: lightgray;
@@ -56,7 +56,7 @@ body {
   background: palegreen;
 }
 
-#input {
+#inputRemove {
   border: 1px solid #aaa;
   box-shadow: 1px 1px 3px #ccc, 0 10px 15px #eee inset;
   border-radius: 15px;
@@ -66,13 +66,13 @@ body {
 }
 #inputAdd {
   border: 1px solid #aaa;
-  box-shadow: 0px 0px 3px #ccc, 0 10px 15px #eee inset;
+  box-shadow: 0 0 3px #ccc, 0 10px 15px #eee inset;
   border-radius: 15px;
   width: 100%;
   height: 80px;
   font-size: 28px;
 }
-#buttonAdd, #buttonRmv {
+#sendAdd, #sendRemove {
   width: 100%;
   height: 50px;
   background-color: #68b12f;
@@ -87,12 +87,9 @@ body {
   border-radius: 20px;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -o-border-radius: 6px;
   box-shadow: inset 0 1px 0 0 #9fd574;
   -webkit-box-shadow: 0 1px 0 0 #9fd574 inset ;
   -moz-box-shadow: 0 1px 0 0 #9fd574 inset;
-  -ms-box-shadow: 0 1px 0 0 #9fd574 inset;
   -o-box-shadow: 0 1px 0 0 #9fd574 inset;
   color: white;
   font-weight: bold;
@@ -101,27 +98,25 @@ body {
   text-shadow: 0 -1px 0 #396715;
   opacity: 70%;
 }
-#buttonAdd:Hover {
+#sendAdd:Hover {
   opacity:.85;
   cursor: pointer;
 }
-#buttonRmv:Hover {
+#sendRemove:Hover {
   opacity:.85;
   cursor: pointer;
 }
-#buttonAdd:Active {
+#sendAdd:Active {
   border: 1px solid #20911e;
   box-shadow: 0 0 10px 5px #356b0b inset;
   -webkit-box-shadow:0 0 10px 5px #356b0b inset ;
   -moz-box-shadow: 0 0 10px 5px #356b0b inset;
-  -ms-box-shadow: 0 0 10px 5px #356b0b inset;
   -o-box-shadow: 0 0 10px 5px #356b0b inset;
 }
-#buttonRmv:Active {
+#sendRemove:Active {
   border: 1px solid #20911e;
   box-shadow: 0 0 10px 5px #356b0b inset;
   -webkit-box-shadow:0 0 10px 5px #356b0b inset ;
   -moz-box-shadow: 0 0 10px 5px #356b0b inset;
-  -ms-box-shadow: 0 0 10px 5px #356b0b inset;
   -o-box-shadow: 0 0 10px 5px #356b0b inset;
 }
