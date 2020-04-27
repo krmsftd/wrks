@@ -4,3 +4,4 @@ setTimeout( () => {
     const inputAdd = document.getElementById('inputAdd');
     const buttonAdd = document.getElementById('buttonAdd');
      })
+//console.log
