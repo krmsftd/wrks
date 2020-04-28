@@ -10,14 +10,12 @@ const onDOMLoaded = () => {
     const REMOVE_BTN = document.getElementById('sendRemove');
     const ADD_INPUT = document.getElementById('inputAdd');
     const ADD_BTN = document.getElementById('sendAdd');
+};
 
+const validateInteger = (input) => {
+    if (isNaN(Number(input.value))) {
+        input.value = '';
     }
-function inputCheck(data) {
-        if ( isNaN(data.value))
-        {  data.value = ""; }
-
-    console.log('data.value=>', data.value)
-}
-
+};
 
 document.addEventListener('DOMContentLoaded', onDOMLoaded);
