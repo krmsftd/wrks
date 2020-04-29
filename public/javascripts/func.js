@@ -9,39 +9,40 @@ const SERVER_URL = 'data';
  */
 const onDOMLoaded = () => {
     /**
-     * Пытайся называть переменные как-то понятнее и в целом разберись какие тебе нужны, а какие нет.
+     * Объявляем необходимые переменные для работы с HTML-элементами.
      */
     const INCOME_INPUT = document.getElementById('inputIncome');
     const EXPENSES_BTN = document.getElementById('btnExpenses');
     const EXPENSES_INPUT = document.getElementById('inputExpenses');
     const INCOME_BTN = document.getElementById('btnIncome');
-    /**
-     * Условия срабатывания input, button
-     */
-    EXPENSES_BTN.addEventListener('click' , send)
-    INCOME_BTN.addEventListener('click', send)
 
     /**
-     * Для отправки данных на сервер.
+     * Создаем асинхронный запрос (async/await) к серверу с помощью fetch, присваиваем результат переменной response.
+     * Первый аргумент URL, второй аргумент - передаваемый объект.
      */
-    async function send() {
-        /* Создаем запрос к серверу fetch, присваиваем результат переменной response, await - асинхронный запрос. */
-        /* Первый аргумент URL, второй аргумент передаваемый объект. */
+    const send = async () => {
         const response = await fetch(
             SERVER_URL,
             {
                 method: 'post',
-                // в объекте то, что передаем на node.js
                 body: JSON.stringify( {
                     income: INCOME_INPUT.value,
                     expenses: EXPENSES_INPUT.value
                 })
             }
         )
-    }
+    };
+
+    /**
+     * Навешиваем обработчики кликов на кнопки.
+     */
+    EXPENSES_BTN.addEventListener('click' , send);
+    INCOME_BTN.addEventListener('click', send);
 };
+
 /**
- * Для валидации введённых значений в инпут.
+ * Валидируем введённые значения в инпут - нас интересуют только числа.
+ * @param {HTMLInputElement} input
  */
 const validateInteger = (input) => {
     if (isNaN(Number(input.value))) {

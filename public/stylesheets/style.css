@@ -13,7 +13,6 @@ body {
 #pageHeader, #pageFooter, #mainAdd, #mainRemove {
   padding: 1em;
   border-radius: 20px;
-
 }
 #pageHeader {
   grid-area: header;
@@ -67,7 +66,8 @@ body {
   width: 100%;
   outline: none;
 }
-#sendAdd, #sendRemove {
+#btnIncome,
+#btnExpenses {
   width: 100%;
   height: 50px;
   background-color: #68b12f;
@@ -92,23 +92,15 @@ body {
   text-align: center;
   text-shadow: 0 -1px 0 #396715;
   opacity: 70%;
+  outline: none;
 }
-#sendAdd:Hover {
+#btnIncome:hover,
+#btnExpenses:hover {
   opacity:.85;
   cursor: pointer;
 }
-#sendRemove:Hover {
-  opacity:.85;
-  cursor: pointer;
-}
-#sendAdd:Active {
-  border: 1px solid #20911e;
-  box-shadow: 0 0 10px 5px #356b0b inset;
-  -webkit-box-shadow:0 0 10px 5px #356b0b inset ;
-  -moz-box-shadow: 0 0 10px 5px #356b0b inset;
-  -o-box-shadow: 0 0 10px 5px #356b0b inset;
-}
-#sendRemove:Active {
+#btnIncome:active,
+#btnExpenses:active {
   border: 1px solid #20911e;
   box-shadow: 0 0 10px 5px #356b0b inset;
   -webkit-box-shadow:0 0 10px 5px #356b0b inset ;
