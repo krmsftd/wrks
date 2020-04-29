@@ -10,7 +10,33 @@ const onDOMLoaded = () => {
     const REMOVE_BTN = document.getElementById('sendRemove');
     const ADD_INPUT = document.getElementById('inputAdd');
     const ADD_BTN = document.getElementById('sendAdd');
+
+    /**
+     * фуенкия send для отправки данных из input
+     */
+async function send() {
+    //объявляем переменную URL
+        const URL = 'data';
+        // создаем запрос к серверу fetch, присваем результат переменной resp, await - асинхронный запрос
+        const Resp = await fetch(
+            URL,
+            //первый агрумент URL, второй аргумент объект
+        {
+            method: 'post',
+            // в объекте то, что передаем на node.js
+            body: JSON.stringify( {InputValue:REMOVE_INPUT.value, InputValue: ADD_INPUT.value })
+        }
+        )
+    }
+
+
+
+
+
 };
+/**
+   * создаем проверку ввода для input
+ */
 
 const validateInteger = (input) => {
     if (isNaN(Number(input.value))) {
