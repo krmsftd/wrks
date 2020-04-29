@@ -12,14 +12,14 @@ const onDOMLoaded = () => {
      * Пытайся называть переменные как-то понятнее и в целом разберись какие тебе нужны, а какие нет.
      */
     const INCOME_INPUT = document.getElementById('inputIncome');
-    const REMOVE_BTN = document.getElementById('sendRemove');
+    const EXPENSES_BTN = document.getElementById('btnExpenses');
     const EXPENSES_INPUT = document.getElementById('inputExpenses');
-    const ADD_BTN = document.getElementById('sendAdd');
+    const INCOME_BTN = document.getElementById('btnIncome');
     /**
      * Условия срабатывания input, button
      */
-    REMOVE_BTN.addEventListener('click' , send)
-    ADD_BTN.addEventListener('click', send)
+    EXPENSES_BTN.addEventListener('click' , send)
+    INCOME_BTN.addEventListener('click', send)
 
     /**
      * Для отправки данных на сервер.
