@@ -15,6 +15,11 @@ const onDOMLoaded = () => {
     const REMOVE_BTN = document.getElementById('sendRemove');
     const EXPENSES_INPUT = document.getElementById('inputExpenses');
     const ADD_BTN = document.getElementById('sendAdd');
+    /**
+     * Условия срабатывания input, button
+     */
+    REMOVE_BTN.addEventListener('click' , send)
+    ADD_BTN.addEventListener('click', send)
 
     /**
      * Для отправки данных на сервер.
