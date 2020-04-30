@@ -33,7 +33,9 @@ const onDOMLoaded = () => {
                 }
             }
         );
+        console.log('resp', response);
         if (response.ok) {
+
             /**
              *
              */
@@ -41,6 +43,7 @@ const onDOMLoaded = () => {
             /**
              *
              */
+
         }
     };
 

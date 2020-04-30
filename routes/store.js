@@ -6,8 +6,14 @@ router.use(timeLog = (req, res, next) => {
   next();
 });
 
+
 /**
  * Handle POST-request here.
  */
+  router.post('/', (req, res) => {
+    console.log('req=>',req.body);
+    res.send({responseLAR: "file was saved!"});
 
+    console.log("ZAVELOS!");
+  })
 module.exports = router;
