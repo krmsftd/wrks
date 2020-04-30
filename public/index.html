@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <meta charset="UTF-8">
-    <script src="/javascripts/func.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css'>
+    <meta charset='UTF-8'>
+    <script src='/javascripts/func.js'></script>
     <title>income/expenses</title>
 </head>
 <body>
 <div class='main-wrapper'>
-    <header id="pageHeader">ALL CASH</header>
-    <article id="mainRemove">INCOME
-        <input type="text" id="inputIncome" placeholder="Введите число" oninput="validateInteger(this)">
-        <button id="btnIncome">SEND</button>
+    <header class='header'>ALL CASH</header>
+    <article class='section__income'>INCOME
+        <input type='text' id='inputIncome' placeholder='Введите число' oninput='validateInteger(this)'>
+        <button id='btnIncome'>SEND</button>
     </article>
-    <nav id="mainAdd">EXPENSES
-        <input type="text" id="inputExpenses" placeholder="Введите число" oninput="validateInteger(this)">
-        <button id="btnExpenses">SEND</button>
-    </nav>
-    <footer id="pageFooter">CLEAR</footer>
+    <article class='section__expenses'>EXPENSES
+        <input type='text' id='inputExpenses' placeholder='Введите число' oninput='validateInteger(this)'>
+        <button id='btnExpenses'>SEND</button>
+    </article>
+    <footer class='footer'>CLEAR</footer>
 </div>
 </body>
 </html>

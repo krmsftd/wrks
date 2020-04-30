@@ -3,25 +3,28 @@ body {
 }
 .main-wrapper {
   display: grid;
-  grid-template-areas: "header header" "add remove" "footer footer";
+  grid-template-areas: 'header header' 'expenses income' 'footer footer';
   grid-template-rows: 160px 1fr 90px;
   grid-template-columns: 50% 50%;
   grid-gap: 10px;
   height: calc(100vh - 40px);
   margin: 20px;
 }
-#pageHeader, #pageFooter, #mainAdd, #mainRemove {
+.header,
+.footer,
+.section__income,
+.section__expenses {
   padding: 1em;
   border-radius: 20px;
 }
-#pageHeader {
+.header {
   grid-area: header;
   background: skyblue;
   font-size: 40px;
   text-align: center;
   font-weight: bold;
 }
-#pageFooter {
+.footer {
   grid-area: footer;
   background: indianred;
   font-size: 30px;
@@ -29,33 +32,31 @@ body {
   font-weight: bold;
   opacity: 50%;
 }
-#pageFooter:Hover {
+.footer:hover {
   transition: 1s;
   background: red;
   opacity: 100%;
   cursor: pointer;}
-#mainRemove {
-  grid-area: remove;
+.section__income {
+  grid-area: income;
   background: lightgray;
   font-size: 40px;
   font-weight: bold;
-
 }
-#mainRemove:Hover {
+.section__income:hover {
   transition: 2s;
   background: indianred;
 }
-#mainAdd {
-  grid-area: add;
+.section__expenses {
+  grid-area: expenses;
   background: lightgray;
   font-size: 40px;
   font-weight: bold;
 }
-#mainAdd:Hover {
+.section__expenses:hover {
   transition: 2s;
   background: palegreen;
 }
-
 #inputIncome,
 #inputExpenses {
   border: 1px solid #aaa;

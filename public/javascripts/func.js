@@ -1,7 +1,7 @@
 /**
- * Допустим дефолтный роут на сервере.
+ * Основной роут на сервере.
  */
-const SERVER_URL = 'data';
+const SERVER_URL = 'store';
 
 /**
  * Оборачиваем весь контент в функцию, которую потом передаём в качестве аргумента для listener'а.
@@ -21,22 +21,33 @@ const onDOMLoaded = () => {
      * Первый аргумент URL, второй аргумент - передаваемый объект.
      */
     const send = async () => {
-        const response = await fetch(
-            SERVER_URL,
+        const response = await fetch(SERVER_URL,
             {
-                method: 'post',
+                method: 'POST',
                 body: JSON.stringify( {
                     income: INCOME_INPUT.value,
                     expenses: EXPENSES_INPUT.value
-                })
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             }
-        )
+        );
+        if (response.ok) {
+            /**
+             *
+             */
+        } else {
+            /**
+             *
+             */
+        }
     };
 
     /**
      * Навешиваем обработчики кликов на кнопки.
      */
-    EXPENSES_BTN.addEventListener('click' , send);
+    EXPENSES_BTN.addEventListener('click', send);
     INCOME_BTN.addEventListener('click', send);
 };
 
