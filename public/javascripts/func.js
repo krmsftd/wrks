@@ -20,20 +20,39 @@ const onDOMLoaded = () => {
      * Создаем асинхронный запрос (async/await) к серверу с помощью fetch, присваиваем результат переменной response.
      * Первый аргумент URL, второй аргумент - передаваемый объект.
      */
+    let body;
     const send = async () => {
+        if (INCOME_INPUT.value === '' && EXPENSES_INPUT.value != '' )
+        {
+                    body =  {
+                     expenses: EXPENSES_INPUT.value
+                            };
+        }
+        if (EXPENSES_INPUT.value === '' && INCOME_INPUT.value != '')
+        {
+                    body = {
+                    income: INCOME_INPUT.value
+            }
+        }
+        if (EXPENSES_INPUT.value != '' && INCOME_INPUT.value != '') {
+                    body = {
+                        expenses: EXPENSES_INPUT.value,
+                        income: INCOME_INPUT.value,
+        }
+        }
+        console.log('body=>', body);
         const response = await fetch(SERVER_URL,
             {
                 method: 'POST',
-                body: JSON.stringify( {
-                    income: INCOME_INPUT.value,
-                    expenses: EXPENSES_INPUT.value
-                }),
+                body: JSON.stringify(body),
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }
         );
         console.log('resp', response);
+        EXPENSES_INPUT.value = '';
+        INCOME_INPUT.value = '';
         if (response.ok) {
 
             /**
@@ -45,6 +64,7 @@ const onDOMLoaded = () => {
              */
 
         }
+
     };
 
     /**
