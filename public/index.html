@@ -1,23 +1,35 @@
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-    <link rel='stylesheet' href='/stylesheets/style.css'>
+    <link rel='stylesheet' href='/stylesheets/main.css'>
     <meta charset='UTF-8'>
     <script src='/javascripts/func.js'></script>
-    <title>income/expenses</title>
+    <title>income/expenses/balance</title>
 </head>
 <body>
-<div class='main-wrapper'>
-    <header class='header'>ALL CASH</header>
-    <article class='section__income'>INCOME
-        <input type='text' id='input-income' placeholder='Введите число' oninput='validateInteger(this)'>
-        <button id='btn-income' onclick='sendIncome()'>SEND</button>
+<header class='v v-header'>Income / Expenses / Balance</header>
+<main class='v v-main'>
+    <aside class='v v-aside'>sidebar</aside>
+    <article class='v v-article'>
+        <header class='header'>All cash</header>
+        <div class='section'>
+            <label for='input-income'>Income</label>
+            <input type='text' id='input-income' placeholder='Введите число' oninput='validateInteger(this)'>
+            <button id='btn-income' onclick='sendIncome()'>SEND</button>
+        </div>
+        <div class='section'>
+            <label for='input-expenses'>Expenses</label>
+            <input type='text' id='input-expenses' placeholder='Введите число' oninput='validateInteger(this)'>
+            <button id='btn-expenses' onclick='sendExpenses()'>SEND</button>
+        </div>
+        <footer class='footer'></footer>
     </article>
-    <article class='section__expenses'>EXPENSES
-        <input type='text' id='input-expenses' placeholder='Введите число' oninput='validateInteger(this)'>
-        <button id='btn-expenses' onclick='sendExpenses()'>SEND</button>
-    </article>
-    <footer class='footer'>CLEAR</footer>
-</div>
+</main>
+<footer class='v v-footer'>
+    <pre>
+        <span>author of the idea: <a href='https://github.com/krmsftd'>krmsftd</a></span>
+        <span>mentor: <a href='https://github.com/impregnable'>impregnable</a></span>
+    </pre>
+</footer>
 </body>
 </html>
