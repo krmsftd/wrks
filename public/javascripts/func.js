@@ -15,6 +15,9 @@ const onDOMLoaded = () => {
     const EXPENSES_INPUT = document.getElementById('input-expenses');
     const EXPENSES_BTN = document.getElementById('btn-expenses');
     const INCOME_BTN = document.getElementById('btn-income');
+    const TOTAL_BTN = document.getElementById('btn-total');
+    const BALANCE = document.getElementById('balance');
+    TOTAL_BTN.addEventListener('click',show);
 
     /**
      * Создаём главный метод для отправки новых данных на сервер.
@@ -60,6 +63,19 @@ const onDOMLoaded = () => {
             input.value = '';
         }
     };
+    async function show() {
+        const response = await  fetch(SERVER_URL, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        } );
+        if (response.ok) {
+            let total = await response.json();
+            console.log('response=>', response);
+            console.log('total=>', total);
+            document.getElementById('balance').innerHTML = total.balance
+        }
+    }
 };
-
 document.addEventListener('DOMContentLoaded', onDOMLoaded);

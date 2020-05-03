@@ -17,5 +17,34 @@ router.post('/', (req, res) => {
         res.send({ ok: true });
     });
 });
+/**
+ * создание роутера get, для получения данных баланса из файла
+ */
+router.get('/', (req, res) => {
+    fs.readFile(PATH, 'UTF-8',(err, fileData) =>{
+        if (err) {
+            return console.log('router.get/err=>', err)
+        }
+        let parcedData;
+        parcedData = JSON.parse(fileData);
+        let expenses = parcedData.expenses;
+        let income = parcedData.income;
+        let balance = 0;
+        if (expenses != null && income != null) {
+            balance = income - expenses
+            }
+        if (expenses != null && income == null) {
+            balance = - expenses
+        }
+        if (expenses == null && income != null) {
+            balance = + income
+        }
+        console.log('balance', balance);
 
+        console.log('parcedData=>', parcedData);
+        console.log('expenses=>', expenses);
+        console.log('income', income);
+        res.send({balance});
+    } )
+});
 module.exports = router;

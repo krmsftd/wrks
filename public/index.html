@@ -8,7 +8,10 @@
 </head>
 <body>
 <div class='main-wrapper'>
-    <header class='header'>ALL CASH</header>
+    <header class='header'>ALL CASH
+       <div id = 'balance' > </div>
+        <button id="btn-total"> TOTAL</button>
+    </header>
     <article class='section__income'>INCOME
         <input type='text' id='input-income' placeholder='Введите число' oninput='validateInteger(this)'>
         <button id='btn-income' onclick='sendIncome()'>SEND</button>
