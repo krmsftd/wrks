@@ -10,12 +10,12 @@
 <div class='main-wrapper'>
     <header class='header'>ALL CASH</header>
     <article class='section__income'>INCOME
-        <input type='text' id='inputIncome' placeholder='Введите число' oninput='validateInteger(this)'>
-        <button id='btnIncome'>SEND</button>
+        <input type='text' id='input-income' placeholder='Введите число' oninput='validateInteger(this)'>
+        <button id='btn-income' onclick='sendIncome()'>SEND</button>
     </article>
     <article class='section__expenses'>EXPENSES
-        <input type='text' id='inputExpenses' placeholder='Введите число' oninput='validateInteger(this)'>
-        <button id='btnExpenses'>SEND</button>
+        <input type='text' id='input-expenses' placeholder='Введите число' oninput='validateInteger(this)'>
+        <button id='btn-expenses' onclick='sendExpenses()'>SEND</button>
     </article>
     <footer class='footer'>CLEAR</footer>
 </div>

@@ -11,36 +11,20 @@ const onDOMLoaded = () => {
     /**
      * Объявляем необходимые переменные для работы с HTML-элементами.
      */
-    const INCOME_INPUT = document.getElementById('inputIncome');
-    const EXPENSES_BTN = document.getElementById('btnExpenses');
-    const EXPENSES_INPUT = document.getElementById('inputExpenses');
-    const INCOME_BTN = document.getElementById('btnIncome');
+    const INCOME_INPUT = document.getElementById('input-income');
+    const EXPENSES_INPUT = document.getElementById('input-expenses');
+    const EXPENSES_BTN = document.getElementById('btn-expenses');
+    const INCOME_BTN = document.getElementById('btn-income');
 
     /**
-     * Создаем асинхронный запрос (async/await) к серверу с помощью fetch, присваиваем результат переменной response.
-     * Первый аргумент URL, второй аргумент - передаваемый объект.
+     * Создаём главный метод для отправки новых данных на сервер.
+     * @param {Object} body
      */
-    let body;
-    const send = async () => {
-        if (INCOME_INPUT.value === '' && EXPENSES_INPUT.value != '' )
-        {
-                    body =  {
-                     expenses: EXPENSES_INPUT.value
-                            };
-        }
-        if (EXPENSES_INPUT.value === '' && INCOME_INPUT.value != '')
-        {
-                    body = {
-                    income: INCOME_INPUT.value
-            }
-        }
-        if (EXPENSES_INPUT.value != '' && INCOME_INPUT.value != '') {
-                    body = {
-                        expenses: EXPENSES_INPUT.value,
-                        income: INCOME_INPUT.value,
-        }
-        }
-        console.log('body=>', body);
+    const send = async (body) => {
+        /**
+         * Создаем асинхронный запрос (async/await) к серверу с помощью fetch, присваиваем результат переменной response.
+         * Первый аргумент URL, второй аргумент - передаваемый объект.
+         */
         const response = await fetch(SERVER_URL,
             {
                 method: 'POST',
@@ -50,11 +34,10 @@ const onDOMLoaded = () => {
                 }
             }
         );
-        console.log('resp', response);
-        EXPENSES_INPUT.value = '';
-        INCOME_INPUT.value = '';
-        if (response.ok) {
 
+        EXPENSES_INPUT.value = INCOME_INPUT.value = '';
+
+        if (response.ok) {
             /**
              *
              */
@@ -62,26 +45,21 @@ const onDOMLoaded = () => {
             /**
              *
              */
-
         }
-
     };
 
-    /**
-     * Навешиваем обработчики кликов на кнопки.
-     */
-    EXPENSES_BTN.addEventListener('click', send);
-    INCOME_BTN.addEventListener('click', send);
-};
+    this.sendExpenses = () => send({ expenses: EXPENSES_INPUT.value });
+    this.sendIncome = () => send({ income: INCOME_INPUT.value });
 
-/**
- * Валидируем введённые значения в инпут - нас интересуют только числа.
- * @param {HTMLInputElement} input
- */
-const validateInteger = (input) => {
-    if (isNaN(Number(input.value))) {
-        input.value = '';
-    }
+    /**
+     * Валидируем введённые значения в инпут - нас интересуют только числа.
+     * @param {HTMLInputElement} input
+     */
+    this.validateInteger = (input) => {
+        if (isNaN(Number(input.value))) {
+            input.value = '';
+        }
+    };
 };
 
 document.addEventListener('DOMContentLoaded', onDOMLoaded);
