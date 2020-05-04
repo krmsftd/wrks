@@ -3,6 +3,7 @@ const router = express.Router();
 const fs = require('fs');
 
 const PATH = 'store.txt';
+const ENCODING = 'UTF-8';
 
 router.use(timeLog = (req, res, next) => {
     console.log('Current date: ', new Date().toJSON().slice(0, 10));
@@ -13,9 +14,9 @@ router.use(timeLog = (req, res, next) => {
  * Объявляем GET - для получения баланса.
  */
 router.get('/', (req, res) => {
-    fs.readFile(PATH, 'UTF-8',(err, fileData) =>{
+    fs.readFile(PATH, ENCODING, (err, fileData) => {
         if (err) {
-            res.send({ balance: 'NO DATA' });
+            res.send({ balance: 'No balance data' });
             return console.error(err);
         }
         const parsedData = JSON.parse(fileData);
@@ -34,7 +35,7 @@ router.get('/', (req, res) => {
         if (!!income && !expenses) {
             balance = income;
         }
-        res.send({balance});
+        res.send({ balance });
     })
 });
 
@@ -42,46 +43,27 @@ router.get('/', (req, res) => {
  * Объявляем POST - для записи новых данных в файл.
  */
 router.post('/', (req, res) => {
-    fs.readFile(PATH,'UTF-8', (err, fileData) => {
-        let objectData;
+    fs.readFile(PATH, ENCODING, (err, fileData) => {
+        let newData;
         let parsedData;
         /**
-         *  условие, если в filedata есть данные, то мы используем JSON распарсить из баффера, после добавляем в parsedData
-         то, что было передано
+         * Если в файле уже были данные, то 'объединяем' их с новыми.
          */
         if (fileData) {
             parsedData = JSON.parse(fileData);
+            const key = Object.keys(req.body)[0];
             /**
-             * проверка parsedData по полям
+             * Проверяем наличие пришедшего 'ключа' в файле.
              */
-            if (parsedData.expenses && req.body.expenses) {
-                let numParcedData = Number(parsedData.expenses);
-                let numReqBody = Number(req.body.expenses);
-               parsedData.expenses = numParcedData + numReqBody;
-              }
-            else if
-             (parsedData.income && req.body.income)
-            {
-                let numParcedData = Number(parsedData.income);
-                let numReqBody = Number(req.body.income);
-                parsedData.income = numParcedData + numReqBody;
+            if (parsedData.hasOwnProperty(key)) {
+                parsedData[key] = Number(req.body[key]) + Number(parsedData[key]);
+            } else {
+                parsedData = {...parsedData, ...req.body};
             }
-            else {
-                Object.assign(parsedData, req.body);
-            }
-           }
-         /**
-         *   если данных нет,файл пустой, то добавляем в него то, что было передано
-         */
-        else
-                   {
-            objectData= {};
-            Object.assign(objectData,req.body);
-            }
-        /**
-         *  используем writeFile, что бы записать файл, в аргументах массивы objectData||parsedData
-         */
-        fs.writeFile(PATH,JSON.stringify(objectData || parsedData), (err) => {
+        } else {
+            newData = {...req.body};
+        }
+        fs.writeFile(PATH, JSON.stringify(newData || parsedData), (err) => {
             if (err) {
                 return console.error(err);
             }
