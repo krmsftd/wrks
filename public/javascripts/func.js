@@ -1,7 +1,7 @@
 /**
  * Основной роут на сервере.
  */
-const SERVER_URL = 'store';
+const API_URL = 'store';
 
 /**
  * Оборачиваем весь контент в функцию, которую потом передаём в качестве аргумента для listener'а.
@@ -13,11 +13,7 @@ const onDOMLoaded = () => {
      */
     const INCOME_INPUT = document.getElementById('input-income');
     const EXPENSES_INPUT = document.getElementById('input-expenses');
-    const EXPENSES_BTN = document.getElementById('btn-expenses');
-    const INCOME_BTN = document.getElementById('btn-income');
-    const TOTAL_BTN = document.getElementById('btn-total');
     const BALANCE = document.getElementById('balance');
-    TOTAL_BTN.addEventListener('click',show);
 
     /**
      * Создаём главный метод для отправки новых данных на сервер.
@@ -25,10 +21,10 @@ const onDOMLoaded = () => {
      */
     const send = async (body) => {
         /**
-         * Создаем асинхронный запрос (async/await) к серверу с помощью fetch, присваиваем результат переменной response.
+         * Создаём асинхронный запрос (async/await) к серверу с помощью fetch, присваиваем результат переменной response.
          * Первый аргумент URL, второй аргумент - передаваемый объект.
          */
-        const response = await fetch(SERVER_URL,
+        const response = await fetch(API_URL,
             {
                 method: 'POST',
                 body: JSON.stringify(body),
@@ -50,6 +46,24 @@ const onDOMLoaded = () => {
              */
         }
     };
+    /**
+     * Создаём метод для получения текущего баланса.
+     */
+    this.getBalance = async () => {
+        const response = await fetch(API_URL,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+
+        if (response.ok) {
+            const result = await response.json();
+            BALANCE.innerHTML = result.balance;
+        }
+    };
 
     this.sendExpenses = () => send({ expenses: EXPENSES_INPUT.value });
     this.sendIncome = () => send({ income: INCOME_INPUT.value });
@@ -63,19 +77,6 @@ const onDOMLoaded = () => {
             input.value = '';
         }
     };
-    async function show() {
-        const response = await  fetch(SERVER_URL, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        } );
-        if (response.ok) {
-            let total = await response.json();
-            console.log('response=>', response);
-            console.log('total=>', total);
-            document.getElementById('balance').innerHTML = total.balance
-        }
-    }
 };
+
 document.addEventListener('DOMContentLoaded', onDOMLoaded);
