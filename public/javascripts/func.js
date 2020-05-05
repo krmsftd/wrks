@@ -14,16 +14,12 @@ const onDOMLoaded = () => {
     const INCOME_INPUT = document.getElementById('input-income');
     const EXPENSES_INPUT = document.getElementById('input-expenses');
     const BALANCE = document.getElementById('balance');
-    INCOME_INPUT.addEventListener('keypress', function (e) {
-        if (e.code === 'Enter') {
-            sendIncome()
-        }});
-    EXPENSES_INPUT.addEventListener('keypress', function (e) {
-        if (e.code === 'Enter') {
-            sendExpenses()
-        }})
 
-
+    /**
+     * Добавляем отправку данных по клавише Enter.
+     */
+    INCOME_INPUT.addEventListener('keypress', (e) => e.code === 'Enter' ? this.sendIncome() : null);
+    EXPENSES_INPUT.addEventListener('keypress', (e) => e.code === 'Enter' ? this.sendExpenses() : null);
 
     /**
      * Создаём главный метод для отправки новых данных на сервер.
@@ -44,12 +40,9 @@ const onDOMLoaded = () => {
             }
         );
         EXPENSES_INPUT.value = INCOME_INPUT.value = '';
-        this.getBalance();
 
         if (response.ok) {
-            /**
-             *
-             */
+            this.getBalance();
         } else {
             /**
              *
@@ -74,9 +67,12 @@ const onDOMLoaded = () => {
             BALANCE.innerHTML = result.balance;
         }
     };
+
     this.sendExpenses = () => send({ expenses: EXPENSES_INPUT.value });
     this.sendIncome = () => send({ income: INCOME_INPUT.value });
-    this.getBalance();
+
+    this.getBalance().catch((err) => console.error(err));
+
     /**
      * Валидируем введённые значения в инпут - нас интересуют только числа.
      * @param {HTMLInputElement} input
