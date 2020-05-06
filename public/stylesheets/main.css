@@ -41,6 +41,10 @@
   flex-direction: column;
   margin-bottom: 20px;
 }
+.chart-wrapper {
+  width: 350px;
+  height: 350px;
+}
 label {
   display: block;
   margin-bottom: 20px;

@@ -9,10 +9,11 @@ router.use(timeLog = (req, res, next) => {
     console.log('Current date: ', new Date().toJSON().slice(0, 10));
     next();
 });
+
 /**
- * Отправляем данные imcome/exp из файла stor.txt для графика
+ * Объявляем GET - для получения ключей (income/expenses).
  */
-router.get('/balance', (req, res) => {
+router.get('/balance-keys', (req, res) => {
     fs.readFile(PATH, ENCODING, (err, fileData) => {
         if (err) {
             return console.error(err);
@@ -24,7 +25,7 @@ router.get('/balance', (req, res) => {
 /**
  * Объявляем GET - для получения баланса.
  */
-router.get('/', (req, res) => {
+router.get('/balance', (req, res) => {
     fs.readFile(PATH, ENCODING, (err, fileData) => {
         if (err) {
             res.send({ balance: 'No balance data' });

@@ -14,9 +14,7 @@ const onDOMLoaded = () => {
     const INCOME_INPUT = document.getElementById('input-income');
     const EXPENSES_INPUT = document.getElementById('input-expenses');
     const BALANCE = document.getElementById('balance');
-    let ctx = document.getElementById('myChart');
-
-    let balanceStore;
+    const CHART = document.getElementById('chart').getContext('2d');
 
     /**
      * Добавляем отправку данных по клавише Enter.
@@ -42,71 +40,73 @@ const onDOMLoaded = () => {
                 }
             }
         );
+
         EXPENSES_INPUT.value = INCOME_INPUT.value = '';
-        await getBalanceKey()
-        /**
-         * Добавляем график myChart
-         * @type {Chart}
-         */
-        let myChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ['INCOME', 'EXPENSES'],
-                datasets:
-                    [{
-                        data: [balanceStore.income,balanceStore.expenses],
-                        backgroundColor: [
-                            'red', 'blue',
-                        ],
-                        borderWidth: 1
-                    }]
-            },
-            options: {  }
-        });
+
         if (response.ok) {
-            this.getBalance();
+            await getBalance();
+            await getBalanceKeys();
         } else {
             /**
              *
              */
         }
     };
+
     /**
      * Создаём метод для получения текущего баланса.
      */
-    this.getBalance = async () => {
-        const response = await fetch(API_URL,
-            {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }
-        );
+    const getBalance = async () => {
+        const response = await fetch(API_URL + '/balance');
 
         if (response.ok) {
             const result = await response.json();
             BALANCE.innerHTML = result.balance;
         }
     };
+
     /**
-     * Создаем метод для получения ключей income/exp.
+     * Создаем метод для получения ключей (income/expenses).
      */
-    const getBalanceKey = async () => {
-        const response = await fetch(API_URL.concat('/balance'),
-            {
-                method: 'GET',
-                   });
+    const getBalanceKeys = async () => {
+        const response = await fetch(API_URL + '/balance-keys');
+
         if (response.ok) {
             const result = await response.json();
-            balanceStore = result;
-         }
+            drawGraph(result);
+        }
+    };
+
+    /**
+     * Создаём метод для отрисовки графика (income/expenses).
+     * Есть известный баг при перерисовке графика - иногда видно старые данные, пока что решением стало
+     * объявление глобального свойства и вызов метода destroy если такое свойство уже существует.
+     */
+    const drawGraph = (options) => {
+        const labels = [...Object.keys(options)];
+        const data = [...Object.values(options)];
+
+        if (window.newChart){
+            window.newChart.destroy();
+        }
+
+        window.newChart = new Chart(CHART, {
+            type: 'doughnut',
+            data: {
+                labels,
+                datasets: [{
+                    data,
+                    backgroundColor: ['red', 'green']
+                }]
+            },
+            options: {}
+        });
     };
 
     this.sendExpenses = () => send({ expenses: EXPENSES_INPUT.value });
     this.sendIncome = () => send({ income: INCOME_INPUT.value });
 
-    this.getBalance().catch((err) => console.error(err));
+    getBalance().catch((err) => console.error(err));
 
     /**
      * Валидируем введённые значения в инпут - нас интересуют только числа.
