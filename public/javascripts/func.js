@@ -14,6 +14,9 @@ const onDOMLoaded = () => {
     const INCOME_INPUT = document.getElementById('input-income');
     const EXPENSES_INPUT = document.getElementById('input-expenses');
     const BALANCE = document.getElementById('balance');
+    let ctx = document.getElementById('myChart');
+
+    let balanceStore;
 
     /**
      * Добавляем отправку данных по клавише Enter.
@@ -40,7 +43,26 @@ const onDOMLoaded = () => {
             }
         );
         EXPENSES_INPUT.value = INCOME_INPUT.value = '';
-
+        await getBalanceKey()
+        /**
+         * Добавляем график myChart
+         * @type {Chart}
+         */
+        let myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['INCOME', 'EXPENSES'],
+                datasets:
+                    [{
+                        data: [balanceStore.income,balanceStore.expenses],
+                        backgroundColor: [
+                            'red', 'blue',
+                        ],
+                        borderWidth: 1
+                    }]
+            },
+            options: {  }
+        });
         if (response.ok) {
             this.getBalance();
         } else {
@@ -66,6 +88,19 @@ const onDOMLoaded = () => {
             const result = await response.json();
             BALANCE.innerHTML = result.balance;
         }
+    };
+    /**
+     * Создаем метод для получения ключей income/exp.
+     */
+    const getBalanceKey = async () => {
+        const response = await fetch(API_URL.concat('/balance'),
+            {
+                method: 'GET',
+                   });
+        if (response.ok) {
+            const result = await response.json();
+            balanceStore = result;
+         }
     };
 
     this.sendExpenses = () => send({ expenses: EXPENSES_INPUT.value });

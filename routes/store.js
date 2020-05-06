@@ -9,6 +9,17 @@ router.use(timeLog = (req, res, next) => {
     console.log('Current date: ', new Date().toJSON().slice(0, 10));
     next();
 });
+/**
+ * Отправляем данные imcome/exp из файла stor.txt для графика
+ */
+router.get('/balance', (req, res) => {
+    fs.readFile(PATH, ENCODING, (err, fileData) => {
+        if (err) {
+            return console.error(err);
+        }
+        res.send(fileData);
+    })
+});
 
 /**
  * Объявляем GET - для получения баланса.
