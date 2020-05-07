@@ -45,7 +45,7 @@ const onDOMLoaded = () => {
 
         if (response.ok) {
             await getBalance();
-            await getBalanceKeys();
+            await showGraph();
         } else {
             /**
              *
@@ -96,12 +96,28 @@ const onDOMLoaded = () => {
                 labels,
                 datasets: [{
                     data,
-                    backgroundColor: ['red', 'green']
+                    backgroundColor: ['green', 'red'],
+                    borderWidth: 0
+
                 }]
             },
             options: {}
         });
     };
+
+    /**
+     * Создаем функцию для отображения графика. при наличии данных в файле store.txt
+     */
+    const showGraph = async () => {
+        await getBalanceKeys();
+        if (result)  {
+            await drawGraph()
+        }
+        else {
+            //
+        }
+    };
+    showGraph();
 
     this.sendExpenses = () => send({ expenses: EXPENSES_INPUT.value });
     this.sendIncome = () => send({ income: INCOME_INPUT.value });
