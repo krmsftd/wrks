@@ -15,17 +15,23 @@
         <header class='header'>Balance:
             <div id='balance'></div>
         </header>
-        <div class='section'>
-            <label for='input-income'>Income</label>
-            <input type='text' id='input-income' placeholder='Введите число' oninput='validateInteger(this)'>
-            <button id='btn-income' onclick='sendIncome()'>SEND</button>
-        </div>
-        <div class='section'>
-            <label for='input-expenses'>Expenses</label>
-            <input type='text' id='input-expenses' placeholder='Введите число' oninput='validateInteger(this)'>
-            <button id='btn-expenses' onclick='sendExpenses()'>SEND</button>
-            <div class='chart-wrapper'>
-                <canvas id='chart' width='350px' height='350px'></canvas>
+        <div class='sections'>
+            <div class='left-sections'>
+                <div class='section'>
+                    <label for='input-income'>Income</label>
+                    <input type='text' id='input-income' placeholder='Введите число' oninput='validateInteger(this)'>
+                    <button id='btn-income' onclick='sendIncome()'>SEND</button>
+                </div>
+                <div class='section'>
+                    <label for='input-expenses'>Expenses</label>
+                    <input type='text' id='input-expenses' placeholder='Введите число' oninput='validateInteger(this)'>
+                    <button id='btn-expenses' onclick='sendExpenses()'>SEND</button>
+                </div>
+            </div>
+            <div class='right-sections'>
+                <div class='section chart-wrapper'>
+                    <canvas id='chart' width='300px' height='300px'></canvas>
+                </div>
             </div>
         </div>
         <footer class='footer'></footer>
