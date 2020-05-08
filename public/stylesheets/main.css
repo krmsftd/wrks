@@ -105,7 +105,4 @@ a {
 #btn-expenses:active {
   border: 1px solid #175c78;
   box-shadow: 0 0 10px 5px #223e6b inset;
-  -webkit-box-shadow:0 0 10px 5px #274a6b inset ;
-  -moz-box-shadow: 0 0 10px 5px #21446b inset;
-  -o-box-shadow: 0 0 10px 5px #20446b inset;
 }

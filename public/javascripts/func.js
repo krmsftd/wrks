@@ -18,10 +18,7 @@ const onDOMLoaded = () => {
     const BALANCE_STORE_INCOME = document.getElementById('balance-store-income');
     const BALANCE_STORE_EXPENSES = document.getElementById('balance-store-expenses');
 
-    /**
-     * Объявляем необходмые переменные
-     */
-    let lastKeys;
+    let lastBalanceKeys;
 
     /**
      * Добавляем отправку данных по клавише Enter.
@@ -81,7 +78,7 @@ const onDOMLoaded = () => {
         if (response.ok) {
             const result = await response.json();
             drawGraph(result);
-            lastKeys = result;
+            lastBalanceKeys = result;
         }
     };
 
@@ -89,6 +86,7 @@ const onDOMLoaded = () => {
      * Создаём метод для отрисовки графика (income/expenses).
      * Есть известный баг при перерисовке графика - иногда видно старые данные, пока что решением стало
      * объявление глобального свойства и вызов метода destroy если такое свойство уже существует.
+     * @param {Object} options
      */
     const drawGraph = (options) => {
         const labels = [...Object.keys(options)];
@@ -111,28 +109,31 @@ const onDOMLoaded = () => {
             options: {}
         });
     };
-    /**
-     * Создаем метод для отображения данных с полей INCOME/EXPENSES
-     */
-
-    this.showBalanceData = () => {
-        if (!lastKeys) {
-            BALANCE_STORE_INCOME.innerHTML = '0';
-            BALANCE_STORE_EXPENSES.innerHTML = '0';
-        }
-            else {
-        if  (lastKeys.income) {
-        BALANCE_STORE_INCOME.innerHTML = lastKeys.income;
-        }
-        if (lastKeys.expenses) {
-        BALANCE_STORE_EXPENSES.innerHTML = lastKeys.expenses;
-        }
-            }
-     };
-
 
     getBalance().catch((err) => console.error(err));
     getBalanceKeys().catch((err) => console.error(err));
+
+    /**
+     * Создаём метод для отображения данных с полей income/expenses.
+     * Временное объёмное решение, для показа правильного прямолинейного результата.
+     * [По-прежнему пока что нет синхронного обновления ключей - будет следующей фичей]
+     */
+    this.showBalanceKeys = () => {
+        if (!lastBalanceKeys) {
+            BALANCE_STORE_INCOME.innerHTML = BALANCE_STORE_EXPENSES.innerHTML = '0';
+        } else {
+            if (!!lastBalanceKeys.income && !lastBalanceKeys.expenses) {
+                BALANCE_STORE_INCOME.innerHTML = `+${lastBalanceKeys.income}`;
+                BALANCE_STORE_EXPENSES.innerHTML = '0';
+            } else if (!!lastBalanceKeys.expenses && !lastBalanceKeys.income) {
+                BALANCE_STORE_EXPENSES.innerHTML = `-${lastBalanceKeys.expenses}`;
+                BALANCE_STORE_INCOME.innerHTML = '0';
+            } else {
+                BALANCE_STORE_INCOME.innerHTML = `+${lastBalanceKeys.income}`;
+                BALANCE_STORE_EXPENSES.innerHTML = `-${lastBalanceKeys.expenses}`;
+            }
+        }
+    };
 
     this.sendExpenses = () => send({ expenses: EXPENSES_INPUT.value });
     this.sendIncome = () => send({ income: INCOME_INPUT.value });
