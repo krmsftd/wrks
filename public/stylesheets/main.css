@@ -65,8 +65,12 @@ input, button {
 a {
   color: #216278;
 }
-#balance {
-  margin-left: 16px;
+#balance,
+#store-income-place,
+#store-exp-place,
+#balance-store-income,
+#balance-store-expenses{
+  margin-left: 15px;
 }
 #input-income,
 #input-expenses {
@@ -77,6 +81,7 @@ a {
   outline: none;
 }
 #btn-income,
+#btn-balance,
 #btn-expenses {
   width: 100%;
   border: 1px solid #216278;
@@ -90,11 +95,17 @@ a {
   outline: none;
 }
 #btn-income:hover,
+#btn-balance:hover,
 #btn-expenses:hover {
   opacity:.85;
   cursor: pointer;
 }
 #btn-income:active,
+#btn-balance:active,
 #btn-expenses:active {
-  /*  */
+  border: 1px solid #175c78;
+  box-shadow: 0 0 10px 5px #223e6b inset;
+  -webkit-box-shadow:0 0 10px 5px #274a6b inset ;
+  -moz-box-shadow: 0 0 10px 5px #21446b inset;
+  -o-box-shadow: 0 0 10px 5px #20446b inset;
 }

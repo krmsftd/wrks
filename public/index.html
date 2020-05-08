@@ -14,10 +14,15 @@
     <article class='v v-article'>
         <header class='header'>Balance:
             <div id='balance'></div>
+            <div id='store-income-place'>Income:+</div>
+            <div id='balance-store-income'></div>
+            <div id='store-exp-place'>Expenses:-</div>
+            <div id='balance-store-expenses'></div>
         </header>
         <div class='sections'>
             <div class='left-sections'>
                 <div class='section'>
+                    <div> <button id='btn-balance' onclick='showBalanceData()'>GET BALANCE STORE</button></div>
                     <label for='input-income'>Income</label>
                     <input type='text' id='input-income' placeholder='Введите число' oninput='validateInteger(this)'>
                     <button id='btn-income' onclick='sendIncome()'>SEND</button>

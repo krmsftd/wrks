@@ -15,6 +15,13 @@ const onDOMLoaded = () => {
     const EXPENSES_INPUT = document.getElementById('input-expenses');
     const BALANCE = document.getElementById('balance');
     const CHART = document.getElementById('chart').getContext('2d');
+    const BALANCE_STORE_INCOME = document.getElementById('balance-store-income');
+    const BALANCE_STORE_EXPENSES = document.getElementById('balance-store-expenses');
+
+    /**
+     * Объявляем необходмые переменные
+     */
+    let lastKeys;
 
     /**
      * Добавляем отправку данных по клавише Enter.
@@ -74,6 +81,7 @@ const onDOMLoaded = () => {
         if (response.ok) {
             const result = await response.json();
             drawGraph(result);
+            lastKeys = result;
         }
     };
 
@@ -103,6 +111,25 @@ const onDOMLoaded = () => {
             options: {}
         });
     };
+    /**
+     * Создаем метод для отображения данных с полей INCOME/EXPENSES
+     */
+
+    this.showBalanceData = () => {
+        if (!lastKeys) {
+            BALANCE_STORE_INCOME.innerHTML = '0';
+            BALANCE_STORE_EXPENSES.innerHTML = '0';
+        }
+            else {
+        if  (lastKeys.income) {
+        BALANCE_STORE_INCOME.innerHTML = lastKeys.income;
+        }
+        if (lastKeys.expenses) {
+        BALANCE_STORE_EXPENSES.innerHTML = lastKeys.expenses;
+        }
+            }
+     };
+
 
     getBalance().catch((err) => console.error(err));
     getBalanceKeys().catch((err) => console.error(err));
