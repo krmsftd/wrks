@@ -31,7 +31,9 @@ const onDOMLoaded = () => {
      * @param {Object} body
      */
     const send = async (body) => {
-
+        /**
+         * Провека полей input
+         */
         if (!INCOME_INPUT.value && !EXPENSES_INPUT.value) {
             console.log('input no data');
         }
