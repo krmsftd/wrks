@@ -32,36 +32,31 @@ const onDOMLoaded = () => {
      */
     const send = async (body) => {
         /**
-         * Провека полей input
+         * Проверяем наличие данных для запроса.
          */
-        if (!INCOME_INPUT.value && !EXPENSES_INPUT.value) {
-            console.log('input no data');
+        if (!Object.values(body)[0]) {
+            return;
         }
-        else  {
-            /**
-             * Создаём асинхронный запрос (async/await) к серверу с помощью fetch, присваиваем результат переменной response.
-             * Первый аргумент URL, второй аргумент - передаваемый объект.
-             */
-            const response = await fetch(API_URL,
-                {
-                    method: 'POST',
-                    body: JSON.stringify(body),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
+
+        /**
+         * Создаём асинхронный запрос (async/await) к серверу с помощью fetch, присваиваем результат переменной response.
+         * Первый аргумент URL, второй аргумент - передаваемый объект.
+         */
+        const response = await fetch(API_URL,
+            {
+                method: 'POST',
+                body: JSON.stringify(body),
+                headers: {
+                    'Content-Type': 'application/json'
                 }
-            );
-
-            EXPENSES_INPUT.value = INCOME_INPUT.value = '';
-
-            if (response.ok) {
-                await getBalance();
-                await getBalanceKeys();
-            } else {
-                /**
-                 *
-                 */
             }
+        );
+
+        EXPENSES_INPUT.value = INCOME_INPUT.value = '';
+
+        if (response.ok) {
+            await getBalance();
+            await getBalanceKeys();
         }
     };
 
