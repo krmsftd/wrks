@@ -110,6 +110,15 @@ const onDOMLoaded = () => {
         });
     };
 
+    const toggleBalanceKeysOpacity = (opacity) => {
+        BALANCE_STORE_INCOME.style.opacity = BALANCE_STORE_EXPENSES.style.opacity = opacity;
+    };
+
+    const hideBalanceKeys = () => {
+        toggleBalanceKeysOpacity('1');
+        setTimeout(() => toggleBalanceKeysOpacity('0'), 3000);
+    };
+
     getBalance().catch((err) => console.error(err));
     getBalanceKeys().catch((err) => console.error(err));
 
@@ -119,8 +128,7 @@ const onDOMLoaded = () => {
      * [По-прежнему пока что нет синхронного обновления ключей - будет следующей фичей]
      */
     this.showBalanceKeys = () => {
-        BALANCE_STORE_INCOME.style.opacity= '1';
-        BALANCE_STORE_EXPENSES.style.opacity= '1';
+        hideBalanceKeys();
 
         if (!lastBalanceKeys) {
             BALANCE_STORE_INCOME.innerHTML = BALANCE_STORE_EXPENSES.innerHTML = '';
@@ -136,10 +144,6 @@ const onDOMLoaded = () => {
                 BALANCE_STORE_EXPENSES.innerHTML = `Expenses: -${lastBalanceKeys.expenses}`;
             }
         }
-        setTimeout(function () {
-            BALANCE_STORE_INCOME.style.opacity= '0';
-            BALANCE_STORE_EXPENSES.style.opacity= '0';
-        }, 3000);
     };
 
     this.sendExpenses = () => send({ expenses: EXPENSES_INPUT.value });
