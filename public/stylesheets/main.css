@@ -65,11 +65,15 @@ input, button {
 a {
   color: #216278;
 }
-#balance,
-#balance-store-income,
-#balance-store-expenses{
+#balance {
   margin-left: 15px;
   transition: 1s;
+}
+#balance-store-income,
+#balance-store-expenses {
+  margin-left: 15px;
+  transition: 1s;
+  opacity: 0;
 }
 #input-income,
 #input-expenses {
