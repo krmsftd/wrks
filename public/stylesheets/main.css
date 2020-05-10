@@ -66,11 +66,10 @@ a {
   color: #216278;
 }
 #balance,
-#store-income-place,
-#store-exp-place,
 #balance-store-income,
 #balance-store-expenses{
   margin-left: 15px;
+  transition: 1s;
 }
 #input-income,
 #input-expenses {

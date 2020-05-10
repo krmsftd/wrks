@@ -119,20 +119,27 @@ const onDOMLoaded = () => {
      * [По-прежнему пока что нет синхронного обновления ключей - будет следующей фичей]
      */
     this.showBalanceKeys = () => {
+        BALANCE_STORE_INCOME.style.opacity= '1';
+        BALANCE_STORE_EXPENSES.style.opacity= '1';
+
         if (!lastBalanceKeys) {
             BALANCE_STORE_INCOME.innerHTML = BALANCE_STORE_EXPENSES.innerHTML = '0';
         } else {
             if (!!lastBalanceKeys.income && !lastBalanceKeys.expenses) {
-                BALANCE_STORE_INCOME.innerHTML = `+${lastBalanceKeys.income}`;
+                BALANCE_STORE_INCOME.innerHTML = `Income: +${lastBalanceKeys.income}`;
                 BALANCE_STORE_EXPENSES.innerHTML = '0';
             } else if (!!lastBalanceKeys.expenses && !lastBalanceKeys.income) {
-                BALANCE_STORE_EXPENSES.innerHTML = `-${lastBalanceKeys.expenses}`;
+                BALANCE_STORE_EXPENSES.innerHTML = `Expenses: -${lastBalanceKeys.expenses}`;
                 BALANCE_STORE_INCOME.innerHTML = '0';
             } else {
-                BALANCE_STORE_INCOME.innerHTML = `+${lastBalanceKeys.income}`;
-                BALANCE_STORE_EXPENSES.innerHTML = `-${lastBalanceKeys.expenses}`;
+                BALANCE_STORE_INCOME.innerHTML = `Income: +${lastBalanceKeys.income}`;
+                BALANCE_STORE_EXPENSES.innerHTML = `Expenses: -${lastBalanceKeys.expenses}`;
             }
         }
+        setTimeout(function () {
+            BALANCE_STORE_INCOME.style.opacity= '0';
+            BALANCE_STORE_EXPENSES.style.opacity= '0';
+        }, 3000);
     };
 
     this.sendExpenses = () => send({ expenses: EXPENSES_INPUT.value });
