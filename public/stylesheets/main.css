@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.header {
+  display: flex;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+.v {
+  color: #fff;
+  font-family: arial, sans-serif;
+  padding: 30px;
+}
+.v-header {
+  background: #06799F;
+  height: 100px;
+}
+.v-main {
+  display: flex;
+  padding: 0;
+  height: calc(100vh - 200px)
+}
+.v-aside {
+  width: 20%;
+  background: #216278;
+}
+.v-article {
+  width: 80%;
+  background: #3AAACF;
+  overflow: auto;
+}
+.v-footer {
+  background: #61B4CF;
+  height: 100px;
+  text-align: center;
+}
+.sections {
+  display: flex;
+}
+.left-sections {
+  width: 60%;
+}
+.right-sections {
+  width: 40%;
+}
+.section {
+  margin-bottom: 20px;
+}
+.chart-wrapper {
+  width: 300px;
+  height: 300px;
+}
+label {
+  display: block;
+  margin-bottom: 20px;
+}
+input, button {
+  height: 32px;
+  padding: 6px;
+  max-width: 50%;
+  margin-bottom: 20px;
+}
+a {
+  color: #216278;
+}
+#balance {
+  margin-left: 15px;
+  transition: 1s;
+}
+#balance-store-income,
+#balance-store-expenses {
+  margin-left: 15px;
+  transition: 1s;
+  opacity: 0;
+}
+#input-income,
+#input-expenses {
+  border: 1px solid #aaa;
+  box-shadow: 1px 1px 3px #ccc, 0 10px 15px #eee inset;
+  border-radius: 15px;
+  width: 100%;
+  outline: none;
+}
+#btn-income,
+#btn-balance,
+#btn-expenses {
+  width: 100%;
+  border: 1px solid #216278;
+  background-color: #216278;
+  border-radius: 6px;
+  font-weight: 600;
+  padding: 6px 20px;
+  text-align: center;
+  opacity: 70%;
+  color: #fff;
+  outline: none;
+}
+#btn-income:hover,
+#btn-balance:hover,
+#btn-expenses:hover {
+  opacity:.85;
+  cursor: pointer;
+}
+#btn-income:active,
+#btn-balance:active,
+#btn-expenses:active {
+  border: 1px solid #175c78;
+  box-shadow: 0 0 10px 5px #223e6b inset;
+}

@@ -11,9 +11,21 @@ router.use(timeLog = (req, res, next) => {
 });
 
 /**
+ * Объявляем GET - для получения ключей (income/expenses).
+ */
+router.get('/balance-keys', (req, res) => {
+    fs.readFile(PATH, ENCODING, (err, fileData) => {
+        if (err) {
+            return console.error(err);
+        }
+        res.send(fileData);
+    })
+});
+
+/**
  * Объявляем GET - для получения баланса.
  */
-router.get('/', (req, res) => {
+router.get('/balance', (req, res) => {
     fs.readFile(PATH, ENCODING, (err, fileData) => {
         if (err) {
             res.send({ balance: 'No balance data' });
