@@ -95,7 +95,7 @@ const onDOMLoaded = () => {
         const labels = [...Object.keys(options)];
         const data = [...Object.values(options)];
 
-        if (window.newChart){
+        if (window.newChart) {
             window.newChart.destroy();
         }
 
@@ -128,7 +128,6 @@ const onDOMLoaded = () => {
     /**
      * Создаём метод для отображения данных с полей income/expenses.
      * Временное объёмное решение, для показа правильного прямолинейного результата.
-     * [По-прежнему пока что нет синхронного обновления ключей - будет следующей фичей]
      */
     this.showBalanceKeys = () => {
         hideBalanceKeys();
