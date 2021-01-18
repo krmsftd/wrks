@@ -3,16 +3,103 @@
 <head>
     <link rel='stylesheet' href='/stylesheets/main.css'>
     <meta charset='UTF-8'>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+          rel="stylesheet">
     <script src='/javascripts/func.js'></script>
     <script src='/chart.js/dist/Chart.js'></script>
     <title>income/expenses/balance</title>
 </head>
 <body>
-<header class='v v-header'>Income / Expenses / Balance</header>
+<!--  <header class='v v-header'>Income / Expenses / Balance</header> -->
+<header class="header">
+    <div class="container">
+        <div class="header__inner">
+            <div class="header__logo">2021</div>
+            <nav class="nav">
+                <a class="nav__link" href="#">Timer</a>
+                <a class="nav__link" href="#">
+                    WebSocket_Chat</a>
+                <a class="nav__link" href="#">Balance_Counter</a>
+                <a class="nav__link" href="#">Chart</a>
+                <a class="nav__link" href="#">Contact</a>
+            </nav>
+        </div>
+    </div>
+</header>
+<div class="intro">
+    <div class="container">
+        <div class="intro__inner">
+            <h2 class="intro_subtitle">sample project by</h2>
+            <h1 class="intro__title">Karim Saifutdinov</h1>
+            <a class="button" href="">More Information</a>
+        </div>
+    </div>
+    <div class="intro_slider">
+        <div class="container">
+            <div class="slider_inner">
+                <div class="intro_slider_item">
+                    <b>1</b>intro
+                </div>
+                <div class="intro_slider_item">
+                    <b>2</b>second
+                </div>
+                <div class="intro_slider_item">
+                    <b>3</b>three
+                </div>
+                <div class="intro_slider_item">
+                    <b>4</b>four
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="section">
+    <div class="container">
+        <div class="section_header">
+            <h3 class="section_subtitle">First sample app</h3>
+            <h2 class="section_title">Total counter</h2>
+            <p> At this place ill tell some words about my app</p>
+        </div>
+    </div>
+    </div>
+    <div class="counter_left">Balance Store:
+        <div id='balance'></div>
+        <div id='balance-store-income'></div>
+        <div id='balance-store-expenses'></div>
+        <div>
+            <button id='btn-balance' onclick='showBalanceKeys()'>GET BALANCE STORE</button>
+        </div>
+        <label for='input-income'>Income</label>
+        <input type='text' id='input-income' placeholder='Введите число' oninput='validateInteger(this)'>
+        <button id='btn-income' onclick='sendIncome()'>SEND</button>
+        <label for='input-expenses'>Expenses</label>
+        <input type='text' id='input-expenses' placeholder='Введите число' oninput='validateInteger(this)'>
+        <button id='btn-expenses' onclick='sendExpenses()'>SEND</button>
+    </div>
+    <div class="counter_right">Graph Chart
+        <div class='section chart-wrapper'>
+            <canvas id='chart' width='300px' height='300px'></canvas>
+        </div>
+    </div>
+    </div>
+    </div>
+    <div class="counter_footer">
+        <p>
+            author of the idea and learner: <a href='https://github.com/krmsftd'>krmsftd</a>
+            mentor and co-creator: <a href='https://github.com/impregnable'>impregnable</a>
+        </p>
+    </div>
+</section>
+
+</body>
+</html>
+
+<!-- Balance counter app -->
+<!--
 <main class='v v-main'>
     <aside class='v v-aside'>sidebar</aside>
     <article class='v v-article'>
-        <header class='header'>Balance:
+        <header class='header_app'>Balance:
             <div id='balance'></div>
             <div id='balance-store-income'></div>
             <div id='balance-store-expenses'></div>
@@ -20,7 +107,9 @@
         <div class='sections'>
             <div class='left-sections'>
                 <div class='section'>
-                    <div><button id='btn-balance' onclick='showBalanceKeys()'>GET BALANCE STORE</button></div>
+                    <div>
+                        <button id='btn-balance' onclick='showBalanceKeys()'>GET BALANCE STORE</button>
+                    </div>
                     <label for='input-income'>Income</label>
                     <input type='text' id='input-income' placeholder='Введите число' oninput='validateInteger(this)'>
                     <button id='btn-income' onclick='sendIncome()'>SEND</button>
