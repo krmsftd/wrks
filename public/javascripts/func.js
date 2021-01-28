@@ -95,7 +95,7 @@ const onDOMLoaded = () => {
         const labels = [...Object.keys(options)];
         const data = [...Object.values(options)];
 
-        if (window.newChart){
+        if (window.newChart) {
             window.newChart.destroy();
         }
 
@@ -149,8 +149,8 @@ const onDOMLoaded = () => {
         }
     };
 
-    this.sendExpenses = () => send({ expenses: EXPENSES_INPUT.value });
-    this.sendIncome = () => send({ income: INCOME_INPUT.value });
+    this.sendExpenses = () => send({expenses: EXPENSES_INPUT.value});
+    this.sendIncome = () => send({income: INCOME_INPUT.value});
 
     /**
      * Валидируем введённые значения в инпут - нас интересуют только числа.
@@ -161,6 +161,46 @@ const onDOMLoaded = () => {
             input.value = '';
         }
     };
+    /**  Приложение Password Generator
+     */
+    /** Привязываем переменные к указанным селекторам */
+    let range = document.querySelector('.input-range');
+    let rangeNum = document.querySelector('.range-num');
+
+    range.oninput = function () {
+        rangeNum.style.left = this.value - 10 + '1px';
+        rangeNum.innerHTML = this.value;
+    };
+
+    let arr_num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    let arr_en = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    let arr_EN = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    let arr_symb = ['!', '@', '#', '$', '%', '?', '-', '+', '=', '~'];
+
+    const compareRandom = () => Math.random() - 0.5;
+    const randomInteger = (min, max) => Math.round(min - 0.5 + Math.random() * (max - min + 1));
+
+    function generatePassword() {
+        let arr = [];
+        if (document.querySelector('#arr_num').checked) arr = arr.concat(arr_num);
+        if (document.querySelector('#arr_en').checked) arr = arr.concat(arr_en);
+        if (document.querySelector('#arr_en_up').checked) arr = arr.concat(arr_EN);
+        if (document.querySelector('#arr_symbols').checked) arr = arr.concat(arr_symb);
+
+        arr.sort(compareRandom);
+
+        let password = '';
+        let passLenght = rangeNum;
+
+        for (let i = 0; i < passLenght; i++) {
+            password += arr[randomInteger(0, arr.length - 1)];
+        }
+        document.querySelector('#input-pass').textContent = password;
+    }
+
+
+    document.querySelector('#btn-pass-refresh').addEventListener('click', generatePassword);
+
 };
 
 document.addEventListener('DOMContentLoaded', onDOMLoaded);

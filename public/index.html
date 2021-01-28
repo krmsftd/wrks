@@ -90,6 +90,55 @@
         </p>
     </div>
 </section>
+<section class="section">
+    <div class="container">
+        <div class="section_header">
+            <h3 class="section_subtitle">
+                Random element generator</h3>
+            <h2 class="section_title">Password Generator</h2>
+            <p>Генерирует надежные случайные пароли, чтобы оставаться в безопасности онлайн.</p>
+        </div>
+    </div>
+    <div class="pass-gen">
+        <header class="pass-gen">
+            <h3>Нужен пароль? Попробуй генератор паролей Password Generator.</h3>
+            <p>Укажите какие символы включать в пароль:
+            </p>
+            <div class="pass-list-box">
+                <div class="list-item">
+                    <input id="arr_num" type="checkbox">
+                    <label for="arr_num">Цифры</label>
+                </div>
+                <div class="list-item">
+                    <input id="arr_en" type="checkbox">
+                    <label for="arr_en">Строчные буквы</label>
+                </div>
+                <div class="list-item">
+                    <input id="arr_en_up" type="checkbox">
+                    <label for="arr_en_up">Заглавные буквы</label>
+                </div>
+                <div class="list-item">
+                    <input id="arr_symbols" type="checkbox">
+                    <label for="arr_symbols">Символы</label>
+                </div>
+            </div>
+            <div id="input-pass-ready" class="input-pass-ready">
+                <input type="text" id="input-pass" placeholder="pass">
+                <div class="pass-overlay"></div>
+            </div>
+            <div class="range">
+                <p>Количество символов:</p>
+                <div class="range-num"></div>
+                <input type="range" class="input-range" min="0" max="20" value="0">
+            </div>
+            <div class="pass-inputs">
+                <button id="btn-pass-refresh"> Generate</button>
+                <button id="btn-pass-copy"> Copy Pass</button>
+            </div>
+        </header>
+    </div>
+</section>
+
 
 </body>
 </html>
