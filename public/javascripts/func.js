@@ -166,9 +166,14 @@ const onDOMLoaded = () => {
     /** Привязываем переменные к указанным селекторам */
     let range = document.querySelector('.input-range');
     let rangeNum = document.querySelector('.range-num');
+    let inputPass = document.querySelector('#input-pass');
+
+    rangeNum.style.left = '-91px';
+    rangeNum.innerHTML = '1';
 
     range.oninput = function () {
         rangeNum.style.left = this.value - 10 + '1px';
+        console.log('this.value =>>', this.value);
         rangeNum.innerHTML = this.value;
     };
 
@@ -180,7 +185,7 @@ const onDOMLoaded = () => {
     const compareRandom = () => Math.random() - 0.5;
     const randomInteger = (min, max) => Math.round(min - 0.5 + Math.random() * (max - min + 1));
 
-    function generatePassword() {
+    const generatePassword = () => {
         let arr = [];
         if (document.querySelector('#arr_num').checked) arr = arr.concat(arr_num);
         if (document.querySelector('#arr_en').checked) arr = arr.concat(arr_en);
@@ -188,19 +193,22 @@ const onDOMLoaded = () => {
         if (document.querySelector('#arr_symbols').checked) arr = arr.concat(arr_symb);
 
         arr.sort(compareRandom);
-
+        console.log('arr=>>', arr);
         let password = '';
-        let passLenght = rangeNum;
+        let passLength = rangeNum.innerHTML;
 
-        for (let i = 0; i < passLenght; i++) {
-            password += arr[randomInteger(0, arr.length - 1)];
+        if (!arr.length) {
+            inputPass.value = 'Укажите символы';
+        } else {
+            for (let i = 0; i < passLength; i++) {
+                let int = randomInteger(0, arr.length - 1);
+                console.log('int=>>', int);
+                password += arr[int];
+            }
+            inputPass.value = password;
         }
-        document.querySelector('#input-pass').textContent = password;
-    }
-
-
-    document.querySelector('#btn-pass-refresh').addEventListener('click', generatePassword);
-
+    };
+    document.querySelector('#btn-pass-generate').addEventListener('click', generatePassword);
 };
 
 document.addEventListener('DOMContentLoaded', onDOMLoaded);

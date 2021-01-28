@@ -326,8 +326,11 @@ input {
   width: 100%;
   outline: none;
   margin-left: 10px;
+  font-weight: 600;
+  transition: 1s;
+  pointer-events: none;
 }
-#btn-pass-refresh,
+#btn-pass-generate,
 #btn-pass-copy {
   text-transform: uppercase;
   text-align: center;
@@ -339,7 +342,7 @@ input {
   outline: none;
   border: 3px solid #000000;
 }
-#btn-pass-refresh:hover,
+#btn-pass-generate:hover,
 #btn-pass-copy:hover {
   background-color: #333333;
   color: white;
@@ -348,7 +351,7 @@ input {
   text-decoration: none;
   transition: background 0.3s, color 0.3s;
 }
-#btn-pass-refresh:active,
+#btn-pass-generate:active,
 #btn-pass-copy:active {
   background-color: #e89a00;
   color: #000000;
@@ -373,4 +376,5 @@ input {
 }
 .input-range {
   width: 300px;
+  padding: 0;
 }
