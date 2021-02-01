@@ -378,3 +378,10 @@ input {
   width: 300px;
   padding: 0;
 }
+#pass-copy {
+  text-transform: uppercase;
+  font-weight: 600;
+  opacity: 0;
+  transition: 1s;
+  font-size: 16px;
+}

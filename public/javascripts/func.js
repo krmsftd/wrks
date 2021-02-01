@@ -209,6 +209,22 @@ const onDOMLoaded = () => {
         }
     };
     document.querySelector('#btn-pass-generate').addEventListener('click', generatePassword);
+
+    const PASS_SAVED = document.getElementById('pass-copy');
+    const togglePassSavedOpacity = (opacity) => PASS_SAVED.style.opacity = opacity;
+    const PassSaved = () => {
+
+        togglePassSavedOpacity('1');
+        setTimeout(() => togglePassSavedOpacity('0'), 3000);
+
+        let copyText = document.getElementById('input-pass');
+        console.log('copy=>', copyText.value);
+        copyText.select();
+        document.execCommand('copy');
+    };
+
+    document.querySelector('#btn-pass-copy').addEventListener('click', PassSaved);
+
 };
 
 document.addEventListener('DOMContentLoaded', onDOMLoaded);
