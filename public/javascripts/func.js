@@ -225,6 +225,30 @@ const onDOMLoaded = () => {
 
     document.querySelector('#btn-pass-copy').addEventListener('click', PassSaved);
 
-};
+    /** Приложение websocket-chat */
 
+
+    const CHAT_INPUT = document.getElementById('chat-input');
+    const CHAT_BTN_SEND = document.getElementById('btn-chat-send');
+    const CHAT_MESSAGES = document.getElementById('chat-messages');
+    const WEBSOCKET = new WebSocket('ws://localhost:4040/');
+    WEBSOCKET.onerror = (error) => console.error('websocket-error=>>', error);
+
+    WEBSOCKET.onmessage = (message) => {
+        console.log('WEBSOCKET.onmessage==>', message.data);
+
+        const CHAT_MESSAGE_ELEMENT = document.createElement('div');
+        CHAT_MESSAGE_ELEMENT.innerHTML = message.data;
+        CHAT_MESSAGES.append(CHAT_MESSAGE_ELEMENT);
+    };
+
+    const chatInputSend = () => {
+
+        WEBSOCKET.send(CHAT_INPUT.value);
+        console.log('chatInputSend==>', CHAT_INPUT.value);
+    };
+    CHAT_BTN_SEND.addEventListener('click', chatInputSend);
+
+
+};
 document.addEventListener('DOMContentLoaded', onDOMLoaded);
