@@ -289,6 +289,7 @@ input, button {
 }
 /* PassGenerator */
 .pass-gen,
+.chat,
 #pass-gen {
   display: flex;
   flex-direction: column;
@@ -301,6 +302,8 @@ input, button {
 }
 
 .list-item,
+.chat-controls,
+.chat-controls-user,
 .pass-list-box{
   display: flex;
   align-items: center;
@@ -312,7 +315,8 @@ input {
 }
 
 #input-pass-ready,
-.input-pass-ready {
+.input-pass-ready,
+#chat-input {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -331,7 +335,8 @@ input {
   pointer-events: none;
 }
 #btn-pass-generate,
-#btn-pass-copy {
+#btn-pass-copy,
+#btn-chat-send {
   text-transform: uppercase;
   text-align: center;
   font-weight: 600;
@@ -343,7 +348,8 @@ input {
   border: 3px solid #000000;
 }
 #btn-pass-generate:hover,
-#btn-pass-copy:hover {
+#btn-pass-copy:hover,
+#btn-chat-send:hover {
   background-color: #333333;
   color: white;
   opacity:.85;
@@ -352,7 +358,8 @@ input {
   transition: background 0.3s, color 0.3s;
 }
 #btn-pass-generate:active,
-#btn-pass-copy:active {
+#btn-pass-copy:active,
+#btn-chat-send:active{
   background-color: #e89a00;
   color: #000000;
 }
@@ -384,4 +391,15 @@ input {
   opacity: 0;
   transition: 1s;
   font-size: 16px;
+}
+/** Chat
+
+#chat-input {
+  text-align: center;
+  border: 3px solid black;
+  width: 100%;
+  outline: none;
+  margin-left: 10px;
+  font-weight: 600;
+  transition: 1s;
 }

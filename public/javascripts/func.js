@@ -231,21 +231,47 @@ const onDOMLoaded = () => {
     const CHAT_INPUT = document.getElementById('chat-input');
     const CHAT_BTN_SEND = document.getElementById('btn-chat-send');
     const CHAT_MESSAGES = document.getElementById('chat-messages');
+    const CHAT_INPUT_USER = document.getElementById('chat-input-user');
+    const CHAT_BTN_USER = document.getElementById('btn-chat-change-user');
+    const CHAT_BTN_CLEAR_CHAT = document.getElementById('btn-chat-clear');
+    let currentUser = 'anonym';
     const WEBSOCKET = new WebSocket('ws://localhost:4040/');
     WEBSOCKET.onerror = (error) => console.error('websocket-error=>>', error);
 
     WEBSOCKET.onmessage = (message) => {
         console.log('WEBSOCKET.onmessage==>', message.data);
-
+        const PARSED_DATA = JSON.parse(message.data);
         const CHAT_MESSAGE_ELEMENT = document.createElement('div');
-        CHAT_MESSAGE_ELEMENT.innerHTML = message.data;
+        CHAT_MESSAGE_ELEMENT.innerHTML = PARSED_DATA.name + ': ' + PARSED_DATA.message;
         CHAT_MESSAGES.append(CHAT_MESSAGE_ELEMENT);
     };
 
-    const chatInputSend = () => {
+    const clearChat = () => {
 
-        WEBSOCKET.send(CHAT_INPUT.value);
-        console.log('chatInputSend==>', CHAT_INPUT.value);
+        while (CHAT_MESSAGES.firstChild) {
+            CHAT_MESSAGES.firstChild.remove()
+        }
+
+        console.log('CHAT_MESSAGES.children==>', CHAT_MESSAGES.children,
+            'CHAT_MESSAGES.firstChild==>', CHAT_MESSAGES.firstChild)
+    };
+
+    CHAT_BTN_CLEAR_CHAT.addEventListener('click', clearChat);
+
+
+    const changeUserName = () => {
+        currentUser = CHAT_INPUT_USER.value
+    };
+
+    CHAT_BTN_USER.addEventListener('click', changeUserName);
+    const chatInputSend = () => {
+        const DATA_TO_SEND = {
+            name: currentUser,
+            message: CHAT_INPUT.value
+        };
+        WEBSOCKET.send(JSON.stringify(DATA_TO_SEND));
+        console.log('chatInputSend==>', CHAT_INPUT.value,
+            'currentUser==>', currentUser);
     };
     CHAT_BTN_SEND.addEventListener('click', chatInputSend);
 

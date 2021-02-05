@@ -142,23 +142,31 @@
 <section class="section">
     <div class="container">
         <div class="section_header">
-            <h3 class="section_subtitle">chat with websocket.io + node.js</h3>
+            <h3 class="section_subtitle">chat with websocket + node.js</h3>
             <h2 class="section_title">websocket chat</h2>
             <p>Протокол WebSocket («веб-сокет»), описанный в спецификации RFC 6455, обеспечивает возможность обмена
                 данными между браузером и сервером через постоянное соединение.</p>
-            <p> Данные передаются по нему в обоих направлениях в виде «пакетов»,
-                без разрыва соединения и дополнительных HTTP-запросов.
-                WebSocket особенно хорош для сервисов, которые нуждаются в постоянном обмене данными, например онлайн
-                игры, торговые площадки, работающие в реальном времени, и т.д.</p>
-        </div>
-        <div class="chat">
-            <div class="chat-controls">
-                <input type="text" id="chat-input" placeholder="your message">
-                <button id="btn-chat-send">Send</button>
-            </div>
-            <div id="chat-messages"></div>
         </div>
     </div>
+    <div class="chat">
+        <h3>Попробуйте Websocket Chat!</h3>
+        <p> Данные передаются по нему в обоих направлениях в виде «пакетов»,
+            без разрыва соединения и дополнительных HTTP-запросов.
+            WebSocket особенно хорош для сервисов, которые нуждаются в постоянном обмене данными, например онлайн
+            игры, торговые площадки, работающие в реальном времени, и т.д.</p>
+        <div class="chat-controls-user">
+            <input type="text" id="chat-input-user" placeholder="enter name">
+            <button id="btn-chat-change-user">Change User</button>
+            <button id="btn-chat-clear">Clear Chat</button>
+        </div>
+        <div id="chat-messages"></div>
+        <div class="chat-controls">
+            <input type="text" id="chat-input" placeholder="your message">
+            <button id="btn-chat-send">Send</button>
+        </div>
+
+    </div>
+
 
 </section>
 
