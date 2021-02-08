@@ -211,16 +211,16 @@ const onDOMLoaded = () => {
     document.querySelector('#btn-pass-generate').addEventListener('click', generatePassword);
 
     const PASS_SAVED = document.getElementById('pass-copy');
+    let copyText = document.getElementById('input-pass');
     const togglePassSavedOpacity = (opacity) => PASS_SAVED.style.opacity = opacity;
     const PassSaved = () => {
-
-        togglePassSavedOpacity('1');
-        setTimeout(() => togglePassSavedOpacity('0'), 3000);
-
-        let copyText = document.getElementById('input-pass');
-        console.log('copy=>', copyText.value);
-        copyText.select();
-        document.execCommand('copy');
+        if (copyText.value) {
+            togglePassSavedOpacity('1');
+            setTimeout(() => togglePassSavedOpacity('0'), 3000);
+            console.log('copy=>', copyText.value);
+            copyText.select();
+            document.execCommand('copy');
+        }
     };
 
     document.querySelector('#btn-pass-copy').addEventListener('click', PassSaved);
@@ -234,44 +234,57 @@ const onDOMLoaded = () => {
     const CHAT_INPUT_USER = document.getElementById('chat-input-user');
     const CHAT_BTN_USER = document.getElementById('btn-chat-change-user');
     const CHAT_BTN_CLEAR_CHAT = document.getElementById('btn-chat-clear');
+    let CHAT_CURRENT_USER_DIV = document.getElementById('chat-current-user');
     let currentUser = 'anonym';
     const WEBSOCKET = new WebSocket('ws://localhost:4040/');
     WEBSOCKET.onerror = (error) => console.error('websocket-error=>>', error);
+
+    /** Событие которое срабатывает каждый раз, когда приходят данные с сервера */
 
     WEBSOCKET.onmessage = (message) => {
         console.log('WEBSOCKET.onmessage==>', message.data);
         const PARSED_DATA = JSON.parse(message.data);
         const CHAT_MESSAGE_ELEMENT = document.createElement('div');
+
+        CHAT_MESSAGE_ELEMENT.style.backgroundColor = PARSED_DATA.color;
+
         CHAT_MESSAGE_ELEMENT.innerHTML = PARSED_DATA.name + ': ' + PARSED_DATA.message;
         CHAT_MESSAGES.append(CHAT_MESSAGE_ELEMENT);
     };
 
     const clearChat = () => {
-
         while (CHAT_MESSAGES.firstChild) {
             CHAT_MESSAGES.firstChild.remove()
         }
-
         console.log('CHAT_MESSAGES.children==>', CHAT_MESSAGES.children,
             'CHAT_MESSAGES.firstChild==>', CHAT_MESSAGES.firstChild)
     };
 
     CHAT_BTN_CLEAR_CHAT.addEventListener('click', clearChat);
 
+    CHAT_CURRENT_USER_DIV.innerHTML = 'current username: anonym';
 
     const changeUserName = () => {
-        currentUser = CHAT_INPUT_USER.value
+        if (CHAT_INPUT_USER.value) {
+            currentUser = CHAT_INPUT_USER.value;
+            CHAT_CURRENT_USER_DIV.innerHTML = 'current username: ' + CHAT_INPUT_USER.value;
+            CHAT_INPUT_USER.value = '';
+        }
     };
 
     CHAT_BTN_USER.addEventListener('click', changeUserName);
+
     const chatInputSend = () => {
-        const DATA_TO_SEND = {
-            name: currentUser,
-            message: CHAT_INPUT.value
-        };
-        WEBSOCKET.send(JSON.stringify(DATA_TO_SEND));
-        console.log('chatInputSend==>', CHAT_INPUT.value,
-            'currentUser==>', currentUser);
+        if (CHAT_INPUT.value) {
+            const DATA_TO_SEND = {
+                name: currentUser,
+                message: CHAT_INPUT.value
+            };
+            WEBSOCKET.send(JSON.stringify(DATA_TO_SEND));
+            console.log('chatInputSend==>', CHAT_INPUT.value,
+                'currentUser==>', currentUser);
+            CHAT_INPUT.value = '';
+        }
     };
     CHAT_BTN_SEND.addEventListener('click', chatInputSend);
 

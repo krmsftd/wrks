@@ -212,8 +212,12 @@ h1, h2, h3, h4, h5, h6 {
   height: 340px;
 }
 .counter_footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -70px;
   clear: both;
-  background: #242424;
+  background: #202020;
   height: 70px;
   color: #eeeeee;
   text-align: center;
@@ -289,7 +293,6 @@ input, button {
 }
 /* PassGenerator */
 .pass-gen,
-.chat,
 #pass-gen {
   display: flex;
   flex-direction: column;
@@ -302,8 +305,7 @@ input, button {
 }
 
 .list-item,
-.chat-controls,
-.chat-controls-user,
+
 .pass-list-box{
   display: flex;
   align-items: center;
@@ -315,8 +317,7 @@ input {
 }
 
 #input-pass-ready,
-.input-pass-ready,
-#chat-input {
+.input-pass-ready {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -336,7 +337,9 @@ input {
 }
 #btn-pass-generate,
 #btn-pass-copy,
-#btn-chat-send {
+#btn-chat-send,
+#btn-chat-change-user,
+#btn-chat-clear {
   text-transform: uppercase;
   text-align: center;
   font-weight: 600;
@@ -349,7 +352,9 @@ input {
 }
 #btn-pass-generate:hover,
 #btn-pass-copy:hover,
-#btn-chat-send:hover {
+#btn-chat-send:hover,
+#btn-chat-change-user:hover,
+#btn-chat-clear:hover {
   background-color: #333333;
   color: white;
   opacity:.85;
@@ -359,7 +364,9 @@ input {
 }
 #btn-pass-generate:active,
 #btn-pass-copy:active,
-#btn-chat-send:active{
+#btn-chat-send:active,
+#btn-chat-change-user:active,
+#btn-chat-clear:active {
   background-color: #e89a00;
   color: #000000;
 }
@@ -392,14 +399,56 @@ input {
   transition: 1s;
   font-size: 16px;
 }
-/** Chat
-
-#chat-input {
+/** Chat */
+.chat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
-  border: 3px solid black;
-  width: 100%;
+  width: auto;
+  min-height: 630px;
+  color: white;
+  background-color: #242424;
+  padding: 5px;
+}
+
+.chat-controls,
+.chat-controls-user {
+  display: flex;
+  justify-content: left;
+  padding: 5px;
+  margin-left: 5px;
+
+}
+#chat-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
   outline: none;
-  margin-left: 10px;
+  border: 3px solid #000000;
+}
+#chat-input-user {
+  border: 3px solid #000000;
+}
+
+#chat-messages {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
   font-weight: 600;
-  transition: 1s;
+  overflow: auto;
+  border: 3px solid #000000;
+  min-height: 300px;
+  max-height: 300px;
+  background: #fafafa;
+  color: #333333;
+}
+#chat-current-user {
+  text-transform: uppercase;
+  text-align: left;
+  font-weight: 600;
+  font-size: 12px;
+  margin-left: 13px;
+  padding: 5px;
 }
